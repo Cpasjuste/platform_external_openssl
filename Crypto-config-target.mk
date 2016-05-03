@@ -1,6 +1,6 @@
 # Auto-generated - DO NOT EDIT!
 # To regenerate, edit openssl.config, then run:
-#     ./import_openssl.sh import /path/to/openssl-1.0.1l.tar.gz
+#     ./import_openssl.sh import /path/to/openssl-1.0.2g.tar.gz
 #
 # This script will append to the following variables:
 #
@@ -14,7 +14,7 @@
 #    LOCAL_EXPORT_C_INCLUDE_DIRS
 
 
-LOCAL_ADDITIONAL_DEPENDENCIES += $(LOCAL_PATH)/Crypto-config-target.mk
+#LOCAL_ADDITIONAL_DEPENDENCIES += $(LOCAL_PATH)/Crypto-config-target.mk
 
 common_cflags := \
   -DNO_WINDOWS_BRAINDEATH \
@@ -174,6 +174,7 @@ common_src_files := \
   crypto/cms/cms_pwri.c \
   crypto/cms/cms_sd.c \
   crypto/cms/cms_smime.c \
+  crypto/cms/cms_kari.c \
   crypto/comp/c_rle.c \
   crypto/comp/c_zlib.c \
   crypto/comp/comp_err.c \
@@ -215,15 +216,6 @@ common_src_files := \
   crypto/des/set_key.c \
   crypto/des/str2key.c \
   crypto/des/xcbc_enc.c \
-  crypto/dh/dh_ameth.c \
-  crypto/dh/dh_asn1.c \
-  crypto/dh/dh_check.c \
-  crypto/dh/dh_depr.c \
-  crypto/dh/dh_err.c \
-  crypto/dh/dh_gen.c \
-  crypto/dh/dh_key.c \
-  crypto/dh/dh_lib.c \
-  crypto/dh/dh_pmeth.c \
   crypto/dsa/dsa_ameth.c \
   crypto/dsa/dsa_asn1.c \
   crypto/dsa/dsa_depr.c \
@@ -267,6 +259,7 @@ common_src_files := \
   crypto/ecdh/ech_key.c \
   crypto/ecdh/ech_lib.c \
   crypto/ecdh/ech_ossl.c \
+  crypto/ecdh/ech_kdf.c \
   crypto/ecdsa/ecs_asn1.c \
   crypto/ecdsa/ecs_err.c \
   crypto/ecdsa/ecs_lib.c \
@@ -350,6 +343,7 @@ common_src_files := \
   crypto/evp/pmeth_fn.c \
   crypto/evp/pmeth_gn.c \
   crypto/evp/pmeth_lib.c \
+  crypto/evp/e_aes_cbc_hmac_sha256.c \
   crypto/ex_data.c \
   crypto/hmac/hm_ameth.c \
   crypto/hmac/hm_pmeth.c \
@@ -371,6 +365,7 @@ common_src_files := \
   crypto/modes/gcm128.c \
   crypto/modes/ofb128.c \
   crypto/modes/xts128.c \
+  crypto/modes/wrap128.c \
   crypto/o_dir.c \
   crypto/o_init.c \
   crypto/o_str.c \
@@ -532,15 +527,25 @@ common_src_files := \
   crypto/x509v3/v3_sxnet.c \
   crypto/x509v3/v3_utl.c \
   crypto/x509v3/v3err.c \
+  crypto/x509v3/v3_scts.c \
+#  crypto/dh/dh_ameth.c \
+#  crypto/dh/dh_depr.c \
+#  crypto/dh/dh_err.c \
+#  crypto/dh/dh_asn1.c \
+#  crypto/dh/dh_check.c \
+#  crypto/dh/dh_gen.c \
+#  crypto/dh/dh_key.c \
+#  crypto/dh/dh_lib.c \
+#  crypto/dh/dh_pmeth.c \
 
 common_c_includes := \
-  external/openssl/. \
-  external/openssl/crypto \
-  external/openssl/crypto/asn1 \
-  external/openssl/crypto/evp \
-  external/openssl/crypto/modes \
-  external/openssl/include \
-  external/openssl/include/openssl \
+  $(LOCAL_PATH)/. \
+  $(LOCAL_PATH)/crypto \
+  $(LOCAL_PATH)/crypto/asn1 \
+  $(LOCAL_PATH)/crypto/evp \
+  $(LOCAL_PATH)/crypto/modes \
+  $(LOCAL_PATH)/include \
+  $(LOCAL_PATH)/include/openssl \
 
 arm_clang_asflags := \
   -no-integrated-as \
@@ -650,6 +655,7 @@ x86_64_cflags := \
   -DAES_ASM \
   -DBSAES_ASM \
   -DDES_UNROLL \
+  -DECP_NISTZ256_ASM \
   -DGHASH_ASM \
   -DMD5_ASM \
   -DOPENSSL_BN_ASM_GF2m \

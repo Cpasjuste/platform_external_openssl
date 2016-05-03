@@ -126,6 +126,11 @@ $code=<<___;
 .text
 .code	32
 
+#ifdef __clang__
+#define ldrplb	ldrbpl
+#define ldrneb	ldrbne
+#endif
+
 .type	rem_4bit,%object
 .align	5
 rem_4bit:
@@ -365,7 +370,8 @@ ___
 }
 
 $code.=<<___;
-#if __ARM_ARCH__>=7
+#if __ARM_MAX_ARCH__>=7
+.arch	armv7-a
 .fpu	neon
 
 .global	gcm_init_neon

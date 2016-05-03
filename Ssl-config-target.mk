@@ -1,6 +1,6 @@
 # Auto-generated - DO NOT EDIT!
 # To regenerate, edit openssl.config, then run:
-#     ./import_openssl.sh import /path/to/openssl-1.0.1l.tar.gz
+#     ./import_openssl.sh import /path/to/openssl-1.0.2g.tar.gz
 #
 # This script will append to the following variables:
 #
@@ -14,14 +14,13 @@
 #    LOCAL_EXPORT_C_INCLUDE_DIRS
 
 
-LOCAL_ADDITIONAL_DEPENDENCIES += $(LOCAL_PATH)/Ssl-config-target.mk
+#LOCAL_ADDITIONAL_DEPENDENCIES += $(LOCAL_PATH)/Ssl-config-target.mk
 
 common_cflags :=
 
 common_src_files := \
   ssl/bio_ssl.c \
   ssl/d1_both.c \
-  ssl/d1_enc.c \
   ssl/d1_lib.c \
   ssl/d1_pkt.c \
   ssl/d1_srtp.c \
@@ -56,6 +55,7 @@ common_src_files := \
   ssl/ssl_sess.c \
   ssl/ssl_stat.c \
   ssl/ssl_txt.c \
+  ssl/t1_ext.c \
   ssl/t1_clnt.c \
   ssl/t1_enc.c \
   ssl/t1_lib.c \
@@ -65,9 +65,13 @@ common_src_files := \
   ssl/tls_srp.c \
 
 common_c_includes := \
-  external/openssl/. \
-  external/openssl/crypto \
-  external/openssl/include \
+  $(LOCAL_PATH)/. \
+  $(LOCAL_PATH)/crypto \
+  $(LOCAL_PATH)/crypto/asn1 \
+  $(LOCAL_PATH)/crypto/evp \
+  $(LOCAL_PATH)/crypto/modes \
+  $(LOCAL_PATH)/include \
+  $(LOCAL_PATH)/include/openssl \
 
 arm_clang_asflags :=
 
@@ -160,3 +164,8 @@ LOCAL_CLANG_ASFLAGS_mips += $(mips_clang_asflags)
 LOCAL_SRC_FILES_mips64 += $(filter-out $(mips64_exclude_files),$(common_src_files) $(mips64_src_files))
 LOCAL_CFLAGS_mips64 += $(mips64_cflags)
 LOCAL_CLANG_ASFLAGS_mips64 += $(mips64_clang_asflags)
+
+
+
+
+

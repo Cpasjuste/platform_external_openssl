@@ -3,6 +3,11 @@
 .text
 .code	32
 
+#ifdef __clang__
+#define ldrplb	ldrbpl
+#define ldrneb	ldrbne
+#endif
+
 .type	rem_4bit,%object
 .align	5
 rem_4bit:
@@ -306,7 +311,8 @@ gcm_gmult_4bit:
 	.word	0xe12fff1e			@ interoperable with Thumb ISA:-)
 #endif
 .size	gcm_gmult_4bit,.-gcm_gmult_4bit
-#if __ARM_ARCH__>=7
+#if __ARM_MAX_ARCH__>=7
+.arch	armv7-a
 .fpu	neon
 
 .global	gcm_init_neon
